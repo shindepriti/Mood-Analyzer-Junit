@@ -3,8 +3,15 @@ package com.brideglab.junit;
 import com.bridgelab.exception.MoodAnalyzerException;
 
 public class MoodAnalyzer {
+    private String message;
 
-    public String checkMood(String message) throws MoodAnalyzerException {
+    public MoodAnalyzer() {
+    }
+
+    public MoodAnalyzer(String message) {
+        this.message=message;
+    }
+    public String checkMood() throws MoodAnalyzerException {
         try {
             if (message.contains(""))
             {
