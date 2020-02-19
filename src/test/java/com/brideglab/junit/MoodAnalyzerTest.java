@@ -33,7 +33,7 @@ public class MoodAnalyzerTest {
     }
 
     @Test
-    public void givenInput_whenNull_shouldReturnHappy()  {
+    public void givenInput_whenNull_shouldReturnException()  {
         MoodAnalyzer moodAnalyzer=new MoodAnalyzer(null);
         try {
             ExpectedException exceptRule=ExpectedException.none();
@@ -46,7 +46,7 @@ public class MoodAnalyzerTest {
     }
 
     @Test
-    public void givenInput_whenEmpty_shouldReturnException() {
+    public void givenInput_whenEmpty_shouldReturnExceptionMessage() {
         MoodAnalyzer moodAnalyzer=new MoodAnalyzer("");
        try {
             String mood = moodAnalyzer.checkMood();
@@ -54,5 +54,25 @@ public class MoodAnalyzerTest {
            Assert.assertEquals("Please Enter Proper message",e.getMessage());
 
        }
+    }
+
+    @Test
+    public void givenInput_whenEnteredNull_shouldReturnExceptionMessage() {
+        MoodAnalyzer moodAnalyzer=new MoodAnalyzer(null);
+        try {
+            String mood=moodAnalyzer.checkMood();
+        } catch (MoodAnalyzerException e) {
+            Assert.assertEquals(MoodAnalyzerException.ExceptionType.ENTERED_NULL,e.type);
+        }
+    }
+
+    @Test
+    public void givenInput_whenEnteredEmpty_shouldReturnExceptionMessage() {
+    MoodAnalyzer moodAnalyzer=new MoodAnalyzer("");
+        try {
+            String mood=moodAnalyzer.checkMood();
+        } catch (MoodAnalyzerException e) {
+            Assert.assertEquals(MoodAnalyzerException.ExceptionType.ENTERED_EMPTY,e.type);
+        }
     }
 }

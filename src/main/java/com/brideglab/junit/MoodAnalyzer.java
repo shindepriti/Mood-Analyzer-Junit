@@ -15,7 +15,7 @@ public class MoodAnalyzer {
         try {
             if (message.contains(""))
             {
-                throw new  MoodAnalyzerException("Please Enter Proper message");
+                throw new  MoodAnalyzerException(MoodAnalyzerException.ExceptionType.ENTERED_EMPTY,"Please Enter Proper message");
             }
             if (message.contains("SAD")) {
                 return "SAD";
@@ -23,7 +23,7 @@ public class MoodAnalyzer {
             return "HAPPY";
 
         }catch(NullPointerException e) {
-           throw new  MoodAnalyzerException("Please Enter Proper message");
+           throw new  MoodAnalyzerException(MoodAnalyzerException.ExceptionType.ENTERED_NULL,"Please Enter Proper message");
         }
     }
 }
