@@ -19,7 +19,7 @@ public class MoodAnalyzer {
 
     public String checkMood() throws MoodAnalyzerException {
         try {
-            if (message.contains(""))
+            if (message.length() == 0)
             {
                 throw new  MoodAnalyzerException(MoodAnalyzerException.ExceptionType.ENTERED_EMPTY,"Please Enter Proper message");
             }
