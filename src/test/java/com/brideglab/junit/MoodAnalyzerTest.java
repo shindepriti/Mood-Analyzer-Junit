@@ -113,7 +113,6 @@ public class MoodAnalyzerTest {
             e.printStackTrace();
         }
     }
-
     //4
     @Test
     public void givenMoodAnalyzerUsingDefaultConstructor_whenProper_ShouldReturnTrue() {
@@ -139,5 +138,22 @@ public class MoodAnalyzerTest {
         } catch (MoodAnalyzerException e) {
             Assert.assertEquals(MoodAnalyzerException.ExceptionType.NO_SUCH_METHOD, e.type);
         }
+    }
+    //5
+    @Test
+    public void givenMoodAnalyzerUsingReflector_whenProper_shouldReturnObject() {
+        MoodAnalyzer moodAnalyzer = createMoodAnalyzer("This is Happy Mood");
+        try {
+            String mood = moodAnalyzer.checkMood();
+            Assert.assertEquals("HAPPY", mood);
+        } catch (MoodAnalyzerException e) {
+            e.printStackTrace();
+        }
+    }
+    //5.1
+    @Test
+    public void givenMoodAnalyzerClassObject_whenProper_ShouldReturnTrue() {
+        MoodAnalyzer moodAnalyzer = createMoodAnalyzer("I am in Happy mood");
+        Assert.assertEquals(new MoodAnalyzer("I am in Happy mood"), moodAnalyzer);
     }
 }
