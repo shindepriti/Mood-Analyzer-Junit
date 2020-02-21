@@ -3,7 +3,7 @@ public class DummyTest {
         methodOne();
     }
     public static void methodOne(){
-       methodTwo();
+        methodTwo();
     }
     public static void methodTwo(){
         try {
