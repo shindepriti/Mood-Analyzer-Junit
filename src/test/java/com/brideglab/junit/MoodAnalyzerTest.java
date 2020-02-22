@@ -1,13 +1,10 @@
 package com.brideglab.junit;
 import com.bridgelab.exception.MoodAnalyzerException;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-
 import static com.brideglab.junit.MoodAnalyzerFactory.*;
 
 public class MoodAnalyzerTest {
@@ -115,7 +112,7 @@ public class MoodAnalyzerTest {
             e.printStackTrace();
         }
     }
-    //4
+    //4.1
     @Test
     public void givenMoodAnalyzerUsingDefaultConstructor_whenProper_ShouldReturnTrue() {
         MoodAnalyzer moodAnalyzer = createMoodAnalyzerDefault();
@@ -176,11 +173,45 @@ public class MoodAnalyzerTest {
     @Test
     public void givenInputUsingMethodInvoke_whenProper_shouldReturnNoSuchMethod(){
         try {
-            MoodAnalyzer moodAnalyzer = createMoodAnalyzer("I am in HAPPY mood");
+            MoodAnalyzer moodAnalyzer = createMoodAnalyzerDefault();
             String mood = (String) MoodAnalyzerFactory.invokeMethod(moodAnalyzer,"checkMood1");
             Assert.assertEquals("HAPPY",mood);
         } catch (MoodAnalyzerException e) {
             Assert.assertEquals(MoodAnalyzerException.ExceptionType.NO_SUCH_METHOD, e.type);
         }
+    }
+    //7.1
+    @Test
+    public void SetField_whenProper_shouldReturnHappy() {
+        try {
+            MoodAnalyzer moodAnalyzer = createMoodAnalyzerDefault();
+           String mood = (String) MoodAnalyzerFactory.setFieldValue(moodAnalyzer,"message","HAPPY");
+        } catch (MoodAnalyzerException e) {
+            e.printStackTrace();
+        }
+
+    }
+    //7.2
+    @Test
+    public void SetField_whenProper_shouldReturnNoSuchMethod() throws MoodAnalyzerException {
+        try {
+            MoodAnalyzer moodAnalyzer = createMoodAnalyzerDefault();
+            String mood = (String) MoodAnalyzerFactory.setFieldValue(moodAnalyzer,"message1","HAPPY");
+        } catch (MoodAnalyzerException e) {
+            Assert.assertEquals(MoodAnalyzerException.ExceptionType.NO_SUCH_FIELD, e.type);
+        }
+
+    }
+
+    //7.3
+    @Test
+    public void SetFieldNull_whenProper_shouldReturnNoSuchMethod() throws MoodAnalyzerException {
+        try {
+            MoodAnalyzer moodAnalyzer = createMoodAnalyzerDefault();
+            String mood = (String) MoodAnalyzerFactory.setFieldValue(moodAnalyzer,"message",null);
+        } catch (MoodAnalyzerException e) {
+            Assert.assertEquals(MoodAnalyzerException.ExceptionType.FIELD_INVOCATION_ISSUE, e.type);
+        }
+
     }
 }
